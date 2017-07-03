@@ -13,7 +13,7 @@ class App extends Component {
 
   _keyDown = (e) => {
     if (e.which === 13) {
-      if (e.target.value.length) {
+      if (!e.target.value.length) {
         return alert('Thats not a name');
       }
 
@@ -27,17 +27,16 @@ class App extends Component {
     return (
       <div className="app">
         <div className="app-header">
-          <h2> Welcome to the Chat </h2>
+          <h2> {this.state.name ? 'Hello ' + this.state.name + '!' : 'Welcome to the Chat!'} </h2>
         </div>
         {this.state.name ?
           <Chat name={this.state.name}/> :
-          <div>
-            <span> Please fill in your name! </span>
+          <div className='name-form'>
+            <span> Please fill in your name and press enter </span>
             <input
-              autoFocus='true'
-              onKeyDown={this._keyDown}
+              onKeyDown={this._keyDown.bind(this)}
               type='text'
-              placeholder='PLease give a name and [enter]'
+              placeholder='[name]'
             />
           </div>
         }

@@ -7,15 +7,23 @@ Installation
 
 Test
 ```
-  npm test
-```
+  //backend
+  npm run test-back
 
-Run
-```
-  npm start
+  //frontend
+  npm run test-front
 ```
 
 Build
 ```
   npm run build
+```
+
+Run
+```
+  //dev
+  npm start
+
+  //prod, requires a build
+  npm run exec-build
 ```

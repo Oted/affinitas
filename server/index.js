@@ -16,7 +16,6 @@ Ws.on('connection', (ws) => {
   });
 
   ws.on('message', (message) => {
-    console.log('c', ws, null, " ");
     const parsed = Utils.parse(message);
 
     if (typeof parsed === 'string') {
@@ -33,11 +32,12 @@ Ws.on('connection', (ws) => {
     }
   });
 
-  //send all the other clients on connect
+  //send all existing other clients on connect
+  //we dont know the name yet so we can not add to clients
   ws.send(
     JSON.stringify({
       type : 'broadcast',
-      clients : JSON.stringify(Object.keys(clients))
+      clients : Object.keys(clients)
     })
   );
 });
@@ -47,7 +47,7 @@ Ws.on('connection', (ws) => {
  */
 const join = (name, ws) => {
   clients[name] = ws;
-  broadcast(name);
+  broadcast();
 };
 
 /**
@@ -66,16 +66,12 @@ const filterLeft = () => {
 /**
  *  Broadcast to everyone
  */
-const broadcast = (notTo) => {
+const broadcast = () => {
   const list = Object.keys(clients);
 
   list.forEach((name) => {
-    if (name === notTo) {
-      return;
-    }
-
     sendMessageTo(name, {
-      type: 'braodcast',
+      type: 'broadcast',
       clients:list
     });
   });

@@ -27,6 +27,9 @@ Ws.on('connection', (ws) => {
         return join(parsed.name, ws);
       case 'disconnect' :
         return leave(parsed.name);
+      case 'private-message' :
+        console.log('here', message);
+        return sendMessageTo(parsed.to, parsed);
       default :
         console.error('no such type ' + parsed.type);
     }
@@ -80,6 +83,6 @@ const broadcast = () => {
 /**
  *  Send message to client
  */
-const sendMessageTo = (name, message) => {
-  clients[name].send(JSON.stringify(message));
+const sendMessageTo = (to, message) => {
+  clients[to].send(JSON.stringify(message));
 }

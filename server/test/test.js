@@ -1,4 +1,3 @@
-let Assert = require('assert');
 const App = require('../');
 const Utils = require('../lib/Utils');
 const Expect = require('chai').expect;

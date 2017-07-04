@@ -25,3 +25,97 @@
   text-align: center;
   width: 20rem;
 }
+
+.chat {
+  text-align:left;
+  margin-left: 1rem;
+}
+
+.chat-header {
+  text-align:center;
+  margin:.5rem;
+  position: relative;
+  padding: .5rem;
+  background-color: #fff;
+  border: 2px solid #ddd;
+  border-radius: .5rem;
+}
+
+.chat-clients {
+  display:inline-block;
+  width:25%;
+}
+
+.list-client {
+  margin:.5rem;
+  position: relative;
+  margin-left: 1rem;
+  padding: .5rem;
+  background-color: #fff;
+  border: 2px solid #ddd;
+  border-radius: .5rem;
+}
+
+.list-client > span {
+  position: absolute;
+  color: red;
+  font-size: .75rem;
+  right: 0.25rem;
+  bottom: 0.5rem;
+}
+
+.active {
+  width:30%;
+  background:rgba(88, 255, 2, 0.25);
+  width: 110%;
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.chat-window {
+  position:relative;
+  width:60%;
+  max-height:50vh;
+  display:inline-block;
+  border: 2px solid #ddd;
+  border-radius: .5rem;
+  border-bottom-left-radius: 0px;
+  border-top-left-radius: 0px;
+  padding: .5rem;
+  float:right;
+  margin:.5rem;
+  overflow:scroll;
+}
+
+.message-recieved {
+  width: 50%;
+  float:right;
+  display: block;
+  padding: .25rem;
+  margin: .25rem;
+  background-color: #fff;
+  border: 2px solid #ddd;
+  border-radius: .5rem;
+}
+
+.message-sent {
+  width: 50%;
+  float:left;
+  display: block;
+  padding: .25rem;
+  margin: .25rem;
+  background-color: #fff;
+  border: 2px solid #ddd;
+  border-radius: .5rem;
+}
+
+.chat-input {
+  text-align: left;
+  padding: 0.5rem;
+  position: fixed;
+  bottom: 0;
+  display: inline-block;
+  width: 80%;
+  left: 0%;
+  width: 100%;
+}

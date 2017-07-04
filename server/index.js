@@ -22,7 +22,7 @@ Ws.on('connection', (ws) => {
       return console.error(parsed);
     }
 
-    console.log(message.type, message);
+    console.log(parsed.type, message);
     switch (parsed.type) {
       case 'connect' :
         return join(parsed.name, ws);

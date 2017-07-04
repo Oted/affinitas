@@ -16,7 +16,7 @@
     "ws": "^3.0.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "node server/index.js & react-scripts start",
     "build": "react-scripts build",
     "test-front": "react-scripts test --env=jsdom",
     "test-back": "./node_modules/.bin/mocha ./server/test/test.js",

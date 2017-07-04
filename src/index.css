@@ -96,6 +96,7 @@
   background-color: #fff;
   border: 2px solid #ddd;
   border-radius: .5rem;
+  border-bottom-left-radius:0;
 }
 
 .message-sent {
@@ -107,6 +108,7 @@
   background-color: #fff;
   border: 2px solid #ddd;
   border-radius: .5rem;
+  border-bottom-right-radius:0;
 }
 
 .chat-input {
@@ -114,8 +116,10 @@
   padding: 0.5rem;
   position: fixed;
   bottom: 0;
+  font-size:1rem;
+  letter-spacing:.25rem;
   display: inline-block;
-  width: 80%;
   left: 0%;
   width: 100%;
+  text-align:center;
 }

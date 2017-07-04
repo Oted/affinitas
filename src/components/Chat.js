@@ -65,7 +65,8 @@ class Chat extends Component {
    *  Set up the socket when the component mounts
    */
   componentWillMount() {
-    this.socket = new WebSocket('ws://localhost:1337/');
+    console.log(process.env);
+    this.socket = new WebSocket(process.env.REACT_APP_WS_ADDRESS || 'ws://localhost:1337/');
 
     this.socket.addEventListener('message', (event) => {
       let parsed = {};

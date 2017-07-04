@@ -24,6 +24,6 @@ Run
   //dev
   npm start
 
-  //prod, requires a build
-  npm run exec-build
+  //prod, requires a build and the address that the app is running on, like so :
+  REACT_APP_WS_ADDRESS=ws://<address>:1337/ npm run exec-build
 ```

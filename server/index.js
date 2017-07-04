@@ -1,4 +1,4 @@
-const Utils = require('./lib/utils');
+const Utils = require('./lib/Utils');
 const WebSocket = require('ws');
 
 let clients = {};
@@ -22,13 +22,13 @@ Ws.on('connection', (ws) => {
       return console.error(parsed);
     }
 
+    console.log(message.type, message);
     switch (parsed.type) {
       case 'connect' :
         return join(parsed.name, ws);
       case 'disconnect' :
         return leave(parsed.name);
       case 'private-message' :
-        console.log('here', message);
         return sendMessageTo(parsed.to, parsed);
       default :
         console.error('no such type ' + parsed.type);

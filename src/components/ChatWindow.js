@@ -30,7 +30,7 @@ class ChatWindow extends Component {
       this.props.send(JSON.stringify({
         type : 'private-message',
         to : this.props.active,
-        from : this.props.name,
+        from : this.props.user.name,
         message: e.target.value,
         stamp
       }));

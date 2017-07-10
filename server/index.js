@@ -25,11 +25,11 @@ Ws.on('connection', (ws) => {
     console.log(parsed.type, message);
     switch (parsed.type) {
       case 'connect' :
-        return join(parsed.name, ws);
-      case 'disconnect' :
-        return leave(parsed.name);
+        return join(Object.assign({}, parsed.user, {notify : false}), ws);
       case 'private-message' :
         return sendMessageTo(parsed.to, parsed);
+      case 'notify' :
+        return notify(parsed);
       default :
         console.error('no such type ' + parsed.type);
     }
@@ -40,7 +40,7 @@ Ws.on('connection', (ws) => {
   ws.send(
     JSON.stringify({
       type : 'broadcast',
-      clients : Object.keys(clients)
+      clients : convertClients()
     })
   );
 });
@@ -48,8 +48,42 @@ Ws.on('connection', (ws) => {
 /**
  *  Add client to list
  */
-const join = (name, ws) => {
-  clients[name] = ws;
+const leave = (user, ws) => {
+  clients[user.name] = {
+    socket : ws,
+    user
+  };
+
+  broadcast();
+};
+
+const notify = (nObj) => {
+  clients[nObj.user.name].user.notify = true;
+  clients[nObj.user.name].user.notify_message = nObj.notify_message;
+
+  setTimeout(() => {
+    unNotify(nObj)
+  },nObj.duration * 1000);
+
+  broadcast();
+};
+
+const unNotify = (nObj) => {
+  clients[nObj.user.name].user.notify = false;
+  clients[nObj.user.name].user.notify_message = null;
+
+  broadcast();
+}
+
+/**
+ *  Add client to list
+ */
+const join = (user, ws) => {
+  clients[user.name] = {
+    socket : ws,
+    user
+  };
+
   broadcast();
 };
 
@@ -58,7 +92,7 @@ const join = (name, ws) => {
  */
 const filterLeft = () => {
   Object.keys(clients).forEach((name) => {
-    if (clients[name]._finalizeCalled) {
+    if (clients[name].socket._finalizeCalled) {
       delete clients[name];
     }
   });
@@ -75,7 +109,7 @@ const broadcast = () => {
   list.forEach((name) => {
     sendMessageTo(name, {
       type: 'broadcast',
-      clients:list
+      clients: convertClients()
     });
   });
 };
@@ -84,5 +118,11 @@ const broadcast = () => {
  *  Send message to client
  */
 const sendMessageTo = (to, message) => {
-  clients[to].send(JSON.stringify(message));
+  clients[to].socket.send(JSON.stringify(message));
+}
+
+const convertClients = () => {
+  return Object.keys(clients).map((name) => {
+    return clients[name].user;
+  });
 }

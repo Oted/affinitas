@@ -24,6 +24,18 @@ describe('Backend', () => {
         return done()
       });
     });
+
+    // it.only('should connect and get a non empty list', (done) => {
+      // let client1 = new Ws('ws://localhost:1337/');
+      // client.once('message', (message) => {
+        // let client2 = new Ws('ws://localhost:1337/');
+        // console.log('messgae', message);
+        // const parsed = JSON.parse(message);
+        // Expect(parsed.clients.length).to.equal(0);
+        // client.close();
+        // return done()
+      // });
+    // });
   });
 });
 

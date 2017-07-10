@@ -7,7 +7,12 @@ class App extends Component {
     super(props);
 
     this.state = {
-      name : null
+      name : null,
+      premium: false,
+      gender: null,
+      age: null,
+      city: null,
+      single: false
     };
   }
 
@@ -15,6 +20,10 @@ class App extends Component {
     if (e.which === 13) {
       if (!e.target.value.length) {
         return alert('Thats not a name');
+      }
+
+      if (!this.state.gender || !this.state.age || !this.state.city) {
+        return alert("Need more data");
       }
 
       this.setState({
@@ -30,13 +39,65 @@ class App extends Component {
           <h2> {this.state.name ? 'Hello ' + this.state.name + '!' : 'Welcome to the Chat!'} </h2>
         </div>
         {this.state.name ?
-          <Chat name={this.state.name}/> :
+          <Chat user={this.state} /> :
           <div className='name-form'>
-            <span> Please fill in your name and press enter </span>
+            <span> Please fill in your details and press enter </span>
+            <br/>
             <input
-              onKeyDown={this._keyDown.bind(this)}
+              onKeyDown={(e) => {this.setState({age: e.target.value})}}
+              type='number'
+              placeholder='[age]'
+            />
+            <br/>
+            <label>
+              <input
+                type="radio"
+                value="option1"
+                name="isPremium"
+                onClick={() => {this.setState({premium:false})}}
+                checked={!this.state.premium}/>
+              normal
+            </label>
+            <label>
+              <input
+                type="radio"
+                value="option2"
+                name="isPremium"
+                onClick={() => {this.setState({premium:true})}}
+                checked={this.state.premium}/>
+              premium
+            </label>
+            <br/>
+            <label>
+              <input
+                type="radio"
+                value="option1"
+                name="gender"
+                onClick={() => {this.setState({gender:"female"})}}
+                checked={this.state.gender === "female"}/>
+              female
+            </label>
+            <br/>
+            <label>
+              <input
+                type="radio"
+                value="option2"
+                name="gender"
+                onClick={() => {this.setState({gender:"male"})}}
+                checked={this.state.gender === "male"}/>
+              male
+            </label>
+            <br/>
+            <input
+              onKeyUp={(e) => {this.setState({city: e.target.value.toLowerCase()})}}
               type='text'
-              placeholder='[name]'
+              placeholder='[city]'
+            />
+            <br/>
+            <input
+              onKeyUp={this._keyDown.bind(this)}
+              type='text'
+              placeholder='[name and enter]'
             />
           </div>
         }

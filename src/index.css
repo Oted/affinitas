@@ -31,6 +31,19 @@
   margin-left: 1rem;
 }
 
+.filters {
+  text-align: center;
+}
+
+.filters > input {
+  text-align: center;
+}
+
+.notify {
+  position: absolute;
+  right: 1rem;
+}
+
 .chat-header {
   text-align:center;
   margin:.5rem;
